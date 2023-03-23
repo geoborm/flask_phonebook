@@ -9,3 +9,7 @@ __pycache__/
 
 # If on a Mac, you can also add the .DS_Store
 .DS_Store
+venv
+__pycache__
+.env
+.vscode

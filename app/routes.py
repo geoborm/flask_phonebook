@@ -1,25 +1,22 @@
 from app import app
 from flask import render_template, redirect, url_for, flash
-from app.forms import SignUpForm
+from app.forms import PhoneForm
 
 @app.route('/')
 def index():
-    return render_template('index.html', name = 'Geoff')
+    return render_template('index.html')
 
-@app.route('/signup', methods=["GET", "POST"])
-def signup():
-    # Create an instance of the form (in the context of the current request)
-    form = SignUpForm()
-    # Check if the form was submitted and that all of the fields are valid
+
+@app.route('/add-phone', methods=["GET", "POST"])
+def add_phone():
+    form = PhoneForm()
+    # Check if the form was submitted and is valid
     if form.validate_on_submit():
-        # If so, get the data from the form fields
-        print('Hooray our form was validated!!')
-        first_name = form.first_name.data
-        last_name = form.last_name.data
-        phone_number = form.phone_number.data
-        email = form.email.data
+        first = form.first_name.data
+        last = form.last_name.data
         address = form.address.data
-        print(first_name, last_name, phone_number, email, address)
-        flash(f"Thank you {first_name} for signing up!", "success")
+        phone = form.phone_number.data
+        print(first, last, address, phone)
+        flash(f"{first} {last} has been added to the phone book", "success")
         return redirect(url_for('index'))
-    return render_template('signup.html', form=form)
+    return render_template('add_phone.html', form=form)
